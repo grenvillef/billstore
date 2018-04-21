@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8" />
+
+<link href="/css/main.css" rel="stylesheet" type="text/css">
+
+
+<body class="container">
+
+<% include partials/header %>
+
+<header>
+<h1>Welcome to BillApp </h1>
+</header>
+
+
+<main>
+    <div class="jumbotron">
+        <h1>Invoice List</h1>
+        <p>Here is a list of your invoices</p>
+
+<table class="table table-inverse">
+      <thead>
+        <tr>
+          <th>InvoiceID</th>
+          <th>InvoiceAmount</th>
+          <th>Currency</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <% for(var i=0; i < invoices.length; i++) { %>
+       <tr>
+
+         <td><%= invoices[i].InvoiceId %></td>
+         <td><%= invoices[i].TotalAmount %></td>
+         <td><%= invoices[i].CurrencyCode %></td>
+
+
+       </tr>
+    <% } %>
+      </tbody>
+
+
+
+
+    </div>
+</main>
+
+
+</body>
+</html>
+
