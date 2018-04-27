@@ -1,12 +1,16 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var helpers = require('express-helpers')(app);
+
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var invoiceApi = require('./routes/index');
+var invoiceDetails = require('./routes/invoiceDetails');
+var postInvoiceApi = require('./routes/index');
 var app = express();
 
 
@@ -25,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 app.use('/invoiceApi',invoiceApi);
+app.use('/invoiceDetails',invoiceDetails);
+app.use('/postInvoiceApi',postInvoiceApi);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -35,10 +41,12 @@ app.use(function(req, res, next) {
 });
 
 // index page 
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
 
     res.render('views/index');
 });
+*/
+
 
 // error handler
 app.use(function(err, req, res, next) {

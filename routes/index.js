@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var invoiceApi=require('../models/invoiceApi');
+var invoiceDetails=require('../models/invoiceDetails');
+var postInvoiceApi=require('../models/postInvoiceApi');
 /* GET home page. */
 
 router.get('/:customerId?', function(req, res, next) {
@@ -11,10 +13,8 @@ router.get('/:customerId?', function(req, res, next) {
 		invoiceApi.getInvoiceByCustomer(req.params.customerId, function(err, rows){
 			if (err){
 				res.json(err);
-//				res.render('index');
 			}
 			else{
-				console.log(rows);
 				res.render('index',{invoices: rows} );
 			}
 		});
@@ -27,11 +27,25 @@ router.get('/:customerId?', function(req, res, next) {
 			}
 			else{
 				res.render('index',{invoices: rows} );
-//				res.json(rows);
 			}
 		});
 	}
 
 });
-	
+
+
+
+router.post('/:customerId?', function(req, res) {
+
+console.log("reached post in routes");
+res.render('index');
+/*	 postInvoiceApi.createInvoice(req.params.customerId, function(req, err){
+                        if (err){
+                                res.json(err);
+//                              res.render('index');
+                        }
+	});
+*/
+});
+
 module.exports = router;

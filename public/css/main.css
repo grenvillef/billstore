@@ -45,6 +45,10 @@
 		border-spacing: 0;
 	}
 
+	td {
+		text-align: left;
+	}
+
 	body {
 		-webkit-text-size-adjust: none;
 	}
