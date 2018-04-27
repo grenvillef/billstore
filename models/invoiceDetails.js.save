@@ -1,0 +1,14 @@
+var db=require('../dbconnection');
+
+var invoiceDetails={
+
+	getAllInvoiceDetails: function(callback){
+ 		return db.query("select * from Invoice_Lines", callback);
+	},
+
+	getDetailsbyInvoice: function(Invoice, callback){
+		return db.query("select * from Invoices, Customer_Invoice_Master where Invoices.InvoiceId = Customer_Invoice_Master.InvoiceId and CustomerId = ?",[customerId],callback);
+	}
+};
+
+module.exports = invoiceApi;
