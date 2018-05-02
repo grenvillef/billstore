@@ -5,18 +5,18 @@ files:
     destination: /home/ec2-user/billstore
 hooks:
   BeforeInstall:
-    - location: app.js
+    - location: /app.js
       timeout: 300
       runas: root
   AfterInstall:
-    - location: app.js
+    - location: /app.js
       timeout: 300
       runas: root
   ApplicationStart:
-    - location: app.js
+    - location: /app.js
     - timeout: 300
       runas: root
   ApplicationStop:
-    - location: app.js
+    - location: /app.js
       timeout: 300
       runas: root
