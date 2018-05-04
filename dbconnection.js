@@ -3,10 +3,10 @@ var mysql = require('mysql');
 const util = require('util');
 
 var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "gunuferns",
-  database:"bdb"
+  host: "billstoredevdb.ckdsg1xslfrp.eu-west-3.rds.amazonaws.com",
+  user: "grenville",
+  password: "GUNUferns01",
+  database:"billstoredevdb"
 });
 
 module.exports=connection;
