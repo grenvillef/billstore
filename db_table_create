@@ -1,5 +1,5 @@
 ﻿
-CREATE TABLE bdb.Customers
+CREATE TABLE Customers
 (
  CustomerId       INT AUTO_INCREMENT NOT NULL ,
  UserID           NVARCHAR(40) NOT NULL ,
@@ -22,7 +22,7 @@ CREATE TABLE bdb.Customers
 
 
 
-CREATE TABLE bdb.Merchants
+CREATE TABLE Merchants
 (
  MerchantId   INT AUTO_INCREMENT NOT NULL ,
  MerchantName NVARCHAR(50) NOT NULL ,
@@ -32,7 +32,7 @@ CREATE TABLE bdb.Merchants
  CONSTRAINT AK1_Supplier_CompanyName UNIQUE NONCLUSTERED (MerchantName ASC)
 );
 
-CREATE TABLE bdb.Invoices
+CREATE TABLE Invoices
 (
  InvoiceId          INT AUTO_INCREMENT NOT NULL ,
  InvoiceNumber      NVARCHAR(10) NOT NULL ,
@@ -52,7 +52,7 @@ CREATE TABLE bdb.Invoices
 );
 
 
-CREATE TABLE bdb.Stores
+CREATE TABLE Stores
 (
  StoreId           INT NOT NULL ,
  MerchantId        INT NOT NULL ,
@@ -67,25 +67,25 @@ CREATE TABLE bdb.Stores
 
  CONSTRAINT PK_Stores PRIMARY KEY CLUSTERED (StoreId ASC, MerchantId ASC),
  CONSTRAINT FK_137 FOREIGN KEY (MerchantId)
-  REFERENCES bdb.Merchants(MerchantId)
+  REFERENCES Merchants(MerchantId)
 );
 
 
 
-CREATE TABLE bdb.Customer_Invoice_Master
+CREATE TABLE Customer_Invoice_Master
 (
  CustomerId INT NOT NULL ,
  InvoiceId  INT NOT NULL ,
 
  CONSTRAINT PK_Customer_Invoice_Master PRIMARY KEY CLUSTERED (CustomerId ASC, InvoiceId ASC),
  CONSTRAINT FK_122 FOREIGN KEY (CustomerId)
-  REFERENCES bdb.Customers(CustomerId),
+  REFERENCES Customers(CustomerId),
  CONSTRAINT FK_126 FOREIGN KEY (InvoiceId)
-  REFERENCES bdb.Invoices(InvoiceId)
+  REFERENCES Invoices(InvoiceId)
 );
 
 
-CREATE TABLE bdb.Invoice_Lines
+CREATE TABLE Invoice_Lines
 (
  InvoiceLineId INT AUTO_INCREMENT  NOT NULL ,
  InvoiceId     INT NOT NULL ,
@@ -97,12 +97,12 @@ CREATE TABLE bdb.Invoice_Lines
 
  CONSTRAINT PK_Product PRIMARY KEY CLUSTERED (InvoiceLineId ASC, InvoiceId ASC),
   CONSTRAINT FK_109 FOREIGN KEY (InvoiceId)
-  REFERENCES bdb.Invoices(InvoiceId)
+  REFERENCES Invoices(InvoiceId)
 );
 
 
 
-CREATE TABLE bdb.OrderItem
+CREATE TABLE OrderItem
 (
  InvoiceLineId INT NOT NULL ,
  InvoiceId     INT NOT NULL ,
@@ -111,10 +111,18 @@ CREATE TABLE bdb.OrderItem
 
  CONSTRAINT PK_OrderItem PRIMARY KEY CLUSTERED (InvoiceLineId ASC, InvoiceId ASC),
  CONSTRAINT FK_OrderItem_OrderId_Order FOREIGN KEY (InvoiceId)
-  REFERENCES bdb.Invoices(InvoiceId),
+  REFERENCES Invoices(InvoiceId),
  CONSTRAINT FK_OrderItem_ProductId_Product FOREIGN KEY (InvoiceLineId, InvoiceId)
-  REFERENCES bdb.Invoice_Lines(InvoiceLineId, InvoiceId)
+  REFERENCES Invoice_Lines(InvoiceLineId, InvoiceId)
 );
+
+insert into Customers values (1 , 'grenville' ,'Grenville' ,'Fernandes' , 'Mr' ,'grenville@gmail.com' ,'Fideliolaan 115' ,'Address Line 2' ,'Address Line 3' ,'NL','1183PK','Amstelveen','NH' ,
+'BASIC'); 
+
+
+
+insert into Customers values (2 , 'suman' ,'Suman' ,'Machado' , 'Ms' ,'sumanmachado@gmail.com' ,'Oesthoekhof 3' ,'Address Line 22' ,'Address Line 33' ,'NL','1014DF','Amsterdam','NH' ,
+'BASIC'); 
 
 insert into Merchants (MerchantName, Phone) VALUES ('Merchant1', '0031123432324');
 
@@ -127,6 +135,13 @@ insert into Stores values ('1','1','Store1M1','Groenhof 1',' Store1M1 AddressLin
 
 insert into Invoices(InvoiceNumber,InvoiceDate, SubTotalAmount, CurrencyCode, InvoiceStatus, StoreId, TotalShippingPrice, TotalAmount, TotalTaxAmount, BarCode, RefundByDate) Values ('0000000001', NOW(), 100.00, 'EUR', 'PAID', '1',10.00,110.00, 21.00, '1234567890123', NOW() + INTERVAL 30 DAY);
 
+insert into Invoices(InvoiceNumber,InvoiceDate, SubTotalAmount, CurrencyCode, InvoiceStatus, StoreId, TotalShippingPrice, TotalAmount, TotalTaxAmount, BarCode, RefundByDate) Values ('0000000002', NOW(), 200.00, 'EUR', 'PAID', '1',10.00,210.00, 42.00, '1234567890456', NOW() + INTERVAL 30 DAY);
+
+insert into Invoices(InvoiceNumber,InvoiceDate, SubTotalAmount, CurrencyCode, InvoiceStatus, StoreId, TotalShippingPrice, TotalAmount, TotalTaxAmount, BarCode, RefundByDate) Values ('0000000003', NOW(), 10.00, 'GBP', 'PAID', '1',2.00,12.00, 2.10, '1234567890789', NOW() + INTERVAL 30 DAY);
+
+
 insert into Customer_Invoice_Master values ('1','1');
+insert into Customer_Invoice_Master values ('1','2');
+insert into Customer_Invoice_Master values ('2','3');
 
 select * from Invoices, Customer_Invoice_Master where Invoices.InvoiceId = Customer_Invoice_Master.InvoiceId and CustomerId = '1'; 
