@@ -1,0 +1,132 @@
+﻿
+CREATE TABLE bdb.Customers
+(
+ CustomerId       INT AUTO_INCREMENT NOT NULL ,
+ UserID           NVARCHAR(40) NOT NULL ,
+ CustFirstName    NVARCHAR(30) NOT NULL ,
+ CustLastName     NVARCHAR(50) NOT NULL ,
+ CustNamePrefix   NVARCHAR(5) NOT NULL ,
+ CustEmailAddress NVARCHAR(50) NOT NULL ,
+ CustAddressLine1 NVARCHAR(50) NOT NULL ,
+ CustAddressLine2 NVARCHAR(50) NOT NULL ,
+ CustAddressLine3 NVARCHAR(50) NOT NULL ,
+ CustCountryCode  CHAR(5) NOT NULL ,
+ CustZipCode      NVARCHAR(15) NOT NULL ,
+ CustCity         NVARCHAR(20) NOT NULL ,
+ CustState        NVARCHAR(20) NOT NULL ,
+ CustType         NVARCHAR(10) NOT NULL ,
+
+ CONSTRAINT PK_Customer PRIMARY KEY CLUSTERED (CustomerId ASC),
+ CONSTRAINT AK1_Customer_CustomerName UNIQUE NONCLUSTERED (UserID ASC)
+);
+
+
+
+CREATE TABLE bdb.Merchants
+(
+ MerchantId   INT AUTO_INCREMENT NOT NULL ,
+ MerchantName NVARCHAR(50) NOT NULL ,
+ Phone        NVARCHAR(20) NULL ,
+
+ CONSTRAINT PK_Supplier PRIMARY KEY CLUSTERED (MerchantId ASC),
+ CONSTRAINT AK1_Supplier_CompanyName UNIQUE NONCLUSTERED (MerchantName ASC)
+);
+
+CREATE TABLE bdb.Invoices
+(
+ InvoiceId          INT AUTO_INCREMENT NOT NULL ,
+ InvoiceNumber      NVARCHAR(10) NOT NULL ,
+ InvoiceDate        DATETIME NOT NULL  ,
+ SubTotalAmount     DECIMAL(12,2) NOT NULL ,
+ CurrencyCode       NVARCHAR(3) NOT NULL ,
+ InvoiceStatus      NVARCHAR(10) NOT NULL ,
+ StoreId            NVARCHAR(30) NOT NULL ,
+ TotalShippingPrice DECIMAL(12,2) NOT NULL ,
+ TotalAmount        DECIMAL(12,2) NOT NULL ,
+ TotalTaxAmount     DECIMAL(12,2) NOT NULL ,
+ BarCode            NVARCHAR(13) NOT NULL ,
+ RefundByDate       DATE NOT NULL ,
+
+ CONSTRAINT PK_Order PRIMARY KEY CLUSTERED (InvoiceId ASC),
+ CONSTRAINT AK1_Order_OrderNumber UNIQUE NONCLUSTERED (InvoiceNumber ASC)
+);
+
+
+CREATE TABLE bdb.Stores
+(
+ StoreId           INT NOT NULL ,
+ MerchantId        INT NOT NULL ,
+ StoreName         NVARCHAR(50) NOT NULL ,
+ StoreAddressLine1 NVARCHAR(50) NOT NULL ,
+ StoreAddressLine2 NVARCHAR(50) NOT NULL ,
+ StoreAddressLine3 NVARCHAR(50) NOT NULL ,
+ StoreCountryCode  CHAR(5) NOT NULL ,
+ StoreZipCode      NVARCHAR(15) NOT NULL ,
+ StoreCity         NVARCHAR(20) NOT NULL ,
+ StoreState        NVARCHAR(20) NOT NULL ,
+
+ CONSTRAINT PK_Stores PRIMARY KEY CLUSTERED (StoreId ASC, MerchantId ASC),
+ CONSTRAINT FK_137 FOREIGN KEY (MerchantId)
+  REFERENCES bdb.Merchants(MerchantId)
+);
+
+
+
+CREATE TABLE bdb.Customer_Invoice_Master
+(
+ CustomerId INT NOT NULL ,
+ InvoiceId  INT NOT NULL ,
+
+ CONSTRAINT PK_Customer_Invoice_Master PRIMARY KEY CLUSTERED (CustomerId ASC, InvoiceId ASC),
+ CONSTRAINT FK_122 FOREIGN KEY (CustomerId)
+  REFERENCES bdb.Customers(CustomerId),
+ CONSTRAINT FK_126 FOREIGN KEY (InvoiceId)
+  REFERENCES bdb.Invoices(InvoiceId)
+);
+
+
+CREATE TABLE bdb.Invoice_Lines
+(
+ InvoiceLineId INT AUTO_INCREMENT  NOT NULL ,
+ InvoiceId     INT NOT NULL ,
+ UnitPrice     DECIMAL(12,2) NOT NULL ,
+ CurrencyCode  NVARCHAR(3) NOT NULL  ,
+ ProductId     NVARCHAR(50) NOT NULL ,
+ Quantity      INT NOT NULL ,
+ IsRefundable  BOOLEAN NOT NULL ,
+
+ CONSTRAINT PK_Product PRIMARY KEY CLUSTERED (InvoiceLineId ASC, InvoiceId ASC),
+  CONSTRAINT FK_109 FOREIGN KEY (InvoiceId)
+  REFERENCES bdb.Invoices(InvoiceId)
+);
+
+
+
+CREATE TABLE bdb.OrderItem
+(
+ InvoiceLineId INT NOT NULL ,
+ InvoiceId     INT NOT NULL ,
+ UnitPrice     DECIMAL(12,2) NOT NULL ,
+ Quantity      INT NOT NULL ,
+
+ CONSTRAINT PK_OrderItem PRIMARY KEY CLUSTERED (InvoiceLineId ASC, InvoiceId ASC),
+ CONSTRAINT FK_OrderItem_OrderId_Order FOREIGN KEY (InvoiceId)
+  REFERENCES bdb.Invoices(InvoiceId),
+ CONSTRAINT FK_OrderItem_ProductId_Product FOREIGN KEY (InvoiceLineId, InvoiceId)
+  REFERENCES bdb.Invoice_Lines(InvoiceLineId, InvoiceId)
+);
+
+insert into Merchants (MerchantName, Phone) VALUES ('Merchant1', '0031123432324');
+
+insert into Merchants (MerchantName, Phone) VALUES ('Merchant2','00323423432');
+
+
+
+
+insert into Stores values ('1','1','Store1M1','Groenhof 1',' Store1M1 AddressLine2','Store1M1 StoreAddressLine3','NL','1187AB','Amstelveen','NH');
+
+insert into Invoices(InvoiceNumber,InvoiceDate, SubTotalAmount, CurrencyCode, InvoiceStatus, StoreId, TotalShippingPrice, TotalAmount, TotalTaxAmount, BarCode, RefundByDate) Values ('0000000001', NOW(), 100.00, 'EUR', 'PAID', '1',10.00,110.00, 21.00, '1234567890123', NOW() + INTERVAL 30 DAY);
+
+insert into Customer_Invoice_Master values ('1','1');
+
+select * from Invoices, Customer_Invoice_Master where Invoices.InvoiceId = Customer_Invoice_Master.InvoiceId and CustomerId = '1'; 
