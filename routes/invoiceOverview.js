@@ -15,7 +15,7 @@ router.get('/:customerId?', function(req, res, next) {
 				res.json(err);
 			}
 			else{
-				res.render('index',{invoices: rows} );
+				res.render('invoiceOverview',{invoices: rows} );
 			}
 		});
 	}
@@ -26,7 +26,8 @@ router.get('/:customerId?', function(req, res, next) {
 				res.json(err);
 			}
 			else{
-				res.render('index',{invoices: rows} );
+				console.log("in invoiceOverview route");
+				res.render('invoiceOverview',{invoices: rows} );
 			}
 		});
 	}
