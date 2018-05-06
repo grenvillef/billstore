@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var helpers = require('express-helpers')(app);
+<<<<<<< HEAD
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
  
@@ -14,6 +15,10 @@ var session = require('express-session');
 var flash = require('connect-flash');
 */
 
+=======
+
+var cookieParser = require('cookie-parser');
+>>>>>>> 38386a16d820b434fe9aa740e8385a8d7d277cc3
 var logger = require('morgan');
 var cors = require('cors');
 var indexRouter = require('./routes/index');
@@ -23,6 +28,7 @@ var invoiceDetails = require('./routes/invoiceDetails');
 var postInvoiceApi = require('./routes/index');
 var app = express();
 
+<<<<<<< HEAD
 /*
 // Here is what we're adding:
 var strategy = new StormpathStrategy();
@@ -50,6 +56,10 @@ app.use(passport.session());
 app.use(flash());
 */
 
+=======
+
+
+>>>>>>> 38386a16d820b434fe9aa740e8385a8d7d277cc3
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -75,7 +85,16 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+<<<<<<< HEAD
 
+=======
+// index page 
+/*app.get('/', function(req, res) {
+
+    res.render('views/index');
+});
+*/
+>>>>>>> 38386a16d820b434fe9aa740e8385a8d7d277cc3
 
 
 // error handler
