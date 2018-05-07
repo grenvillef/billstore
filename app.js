@@ -2,15 +2,20 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var helpers = require('express-helpers')(app);
+var stormpath = require('express-stormpath');
 
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+
+
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
 var invoiceOverviewRouter = require('./routes/invoiceOverview');
 var invoiceDetailsRouter = require('./routes/invoiceDetails');
 var postInvoiceApi = require('./routes/index');
+
+
 var app = express();
 
 
@@ -33,6 +38,7 @@ app.use(cors());
 
 
 app.use('/', indexRouter);
+app.use('/login',loginRouter);
 app.use('/invoiceOverview',invoiceOverviewRouter);
 app.use('/invoiceDetails',invoiceDetailsRouter);
 
@@ -63,5 +69,26 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
 //  res.render('error');
 });
+
+/*
+app.use(stormpath.init(app, {
+  application: {
+    href: process.env['STORMPATH_APPLICATION_HREF']
+  },
+  web: {
+    login: {
+      nextUri: '/dashboard',
+    },
+    oauth2: {
+      client_credentials: {
+        accessToken: {
+          ttl: 3600
+        }
+      }
+    }
+  }
+}));
+
+*/
 
 module.exports = app;
