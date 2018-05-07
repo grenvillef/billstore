@@ -22,7 +22,7 @@
 						<a href="generic.html">Invoices</a>
 						<a href="elements.html">About</a>
 					</nav>
-					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+					<a href="navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 				</div>
 			</header>
 
@@ -51,7 +51,7 @@
 					</div>
 
 					<footer>
-						<a href="#" class="button">New to BillStore? Click here to get started</a>
+						<a href="/Signup" class="button">New to BillStore? Click here to get started</a>
 					</footer>
 				</div>
 			</section>
@@ -79,9 +79,8 @@
                                                <tbody>
                                                 <% for(var i=0; i < invoices.length; i++) { %>
                                                <tr>
-
-	         <td><%= invoices[i].InvoiceNumber %></td>
-        	 <td><%= invoices[i].InvoiceDate %></td>
+	         <td><a href="/InvoiceDetails/<%= invoices[i].InvoiceId %>"><%= invoices[i].InvoiceNumber %> </a></td>
+        	 <td><%= invoices[i].InvoiceDate.toDateString() %></td>
          	<td><%= invoices[i].CurrencyCode %></td>
        		  <td><%= invoices[i].TotalAmount %></td>
 
