@@ -73,11 +73,10 @@ app.use(function(err, req, res, next) {
 /*
 app.use(stormpath.init(app, {
   application: {
-    href: process.env['STORMPATH_APPLICATION_HREF']
-  },
+    href: process.env['STORMPATH_APPLICATION_HREF']},
   web: {
     login: {
-      nextUri: '/dashboard',
+      nextUri: '/invoiceOverview',
     },
     oauth2: {
       client_credentials: {
