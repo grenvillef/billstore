@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
 
-	res.redirect(302, 'login');
+	res.render('login');
         if (err){
             res.json(err);
         }

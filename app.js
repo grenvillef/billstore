@@ -2,7 +2,10 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var helpers = require('express-helpers')(app);
+
 var stormpath = require('express-stormpath');
+const session = require('express-session');
+const { ExpressOIDC } = require('@okta/oidc-middleware');
 
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -68,6 +71,14 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
 //  res.render('error');
+});
+
+const oidc = new ExpressOIDC({
+  issuer: 'https://dev-360153.oktapreview.com/oauth2/default',
+  client_id: '0oaewznt08Twwz0ZX0h7',
+  client_secret: 'RWz2iBs9PMBDKzX0U0GMB9sYPCWaLHGZIirfWiXO',
+  redirect_uri: 'http://ec2-35-180-74-148.eu-west-3.compute.amazonaws.com:3000/invoiceOverview',
+  scope: 'openid profile'
 });
 
 /*
