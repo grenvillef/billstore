@@ -1,19 +1,27 @@
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var helpers = require('express-helpers')(app);
 
-var stormpath = require('express-stormpath');
-const session = require('express-session');
+var passport = require('passport');
+var flash    = require('connect-flash');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
+var morgan      = require('morgan');
+
+
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
+var signupRouter = require('./routes/signup');
 var invoiceOverviewRouter = require('./routes/invoiceOverview');
 var invoiceDetailsRouter = require('./routes/invoiceDetails');
 var postInvoiceApi = require('./routes/index');
@@ -29,28 +37,38 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
+
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// required for passport
+app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+//require('./app/routes.js')(app, passport);
+
 app.use(cors());
 
 
 
-
+// Define the routes
 app.use('/', indexRouter);
 app.use('/login',loginRouter);
+app.use('/signup',signupRouter);
 app.use('/invoiceOverview',invoiceOverviewRouter);
 app.use('/invoiceDetails',invoiceDetailsRouter);
-
-
-
-
-
 //app.use('/postInvoiceApi',postInvoiceApi);
 //app.use('/users', usersRouter);
+
 
 
 // catch 404 and forward to error handler
@@ -73,6 +91,10 @@ app.use(function(err, req, res, next) {
 //  res.render('error');
 });
 
+
+
+/*
+
 const oidc = new ExpressOIDC({
   issuer: 'https://dev-360153.oktapreview.com/oauth2/default',
   client_id: '0oaewznt08Twwz0ZX0h7',
@@ -81,7 +103,6 @@ const oidc = new ExpressOIDC({
   scope: 'openid profile'
 });
 
-/*
 app.use(stormpath.init(app, {
   application: {
     href: process.env['STORMPATH_APPLICATION_HREF']},
@@ -102,3 +123,5 @@ app.use(stormpath.init(app, {
 */
 
 module.exports = app;
+
+

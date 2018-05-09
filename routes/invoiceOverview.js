@@ -5,7 +5,10 @@ var invoiceDetails=require('../models/invoiceDetails');
 var postInvoiceApi=require('../models/postInvoiceApi');
 /* GET home page. */
 
-router.get('/:customerId?', function(req, res, next) {
+module.exports = function(app, passport) {
+
+
+router.get('/:customerId?',isLoggedIn,function(req, res, next) {
 
 	if (req.params.customerId){
 
@@ -21,13 +24,15 @@ router.get('/:customerId?', function(req, res, next) {
 	}
 	else{
 
+
 		invoiceApi.getAllInvoices(function(err,rows){
 			if(err){
 				res.json(err);
 			}
 			else{
-				console.log("in invoiceOverview route");
-				res.render('invoiceOverview',{invoices: rows} );
+				res.render('invoiceOverview',{user:req.user});
+
+			//	res.render('invoiceOverview',{invoices: rows} );
 			}
 		});
 	}
@@ -35,18 +40,17 @@ router.get('/:customerId?', function(req, res, next) {
 });
 
 
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
 
-router.post('/:customerId?', function(req, res) {
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
 
-console.log("reached post in routes");
-res.render('index');
-/*	 postInvoiceApi.createInvoice(req.params.customerId, function(req, err){
-                        if (err){
-                                res.json(err);
-//                              res.render('index');
-                        }
-	});
-*/
-});
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
+}
 
-module.exports = router;
+
+

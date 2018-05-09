@@ -31,47 +31,36 @@
 				<div class="inner">
 					<header>
 						<h1>Welcome to BillStore</h1>
+						<h3>Enter your email address and password to log in</h1>
 					</header>
 
-					<div class="flex ">
+					<!--div class="flex "-->
 
-						<!-- Latest CDN production Javascript and CSS: 2.6.0 -->
-						<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.6.0/js/okta-sign-in.min.js" type="text/javascript"></script>
-						<link  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.6.0/css/okta-sign-in.min.css" type="text/css"  rel="stylesheet"/>
-	
-						<!-- Theme file: Customize or replace this file if you want to override our default styles -->
-						<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.6.0/css/okta-theme.css" type="text/css" rel="stylesheet"/>
+					  <!-- LOGIN FORM -->
+					<form action="/signup" method="post">
 
-					</div>
-
-					<div id="widget-container"></div>
-
-					<script>
-						var signIn = new OktaSignIn({
-							clientId: '0oaewznt08Twwz0ZX0h7',
-							baseUrl: 'https://dev-360153.oktapreview.com'
-						});
-
-						 signIn.renderEl({
-							el: '#widget-container'
-						}, 
-						function success(res) {
-						    if (res.status === 'SUCCESS') {
-					      		console.log('Do something with this sessionToken', res.session.token);
-						    } else {
-						    // The user can be in another authentication state that requires further action.
-						    // For more information about these states, see:
-						    //   https://github.com/okta/okta-signin-widget#rendereloptions-success-error
-    						}
-					  });
+						<div class="form-group">
+                                                      <label><font color="white">Email address</font></label>
+                                                        <input type="text" class="form-control" name="email">
+                                                 </div>
 
 
-					</script>
+					        <div class="form-group">
+						      <label><font color="white">Password</font></label>
+						            <input type="password" class="form-control" name="password">
+					        </div>
 
-					
-					</div>
+					        <button type="submit" class="btn btn-warning btn-lg">Login</button>
+				     </form>
 
 
+
+
+					<!--/div-->
+
+					<footer>
+						<a href="/signup" class="button">Don't have an account? Click here to sign up </a>
+					</footer>
 				</div>
 			</section>
 
