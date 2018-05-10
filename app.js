@@ -6,6 +6,7 @@ var path = require('path');
 var helpers = require('express-helpers')(app);
 
 var passport = require('passport');
+require('./config/passport')(passport); 
 var flash    = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -40,7 +41,12 @@ app.set('view engine', 'ejs');
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+
+
+app.use(bodyParser.json()); // get information from html forms
+app.use(bodyParser.urlencoded({
+     extended: true
+})); 
 
 app.use(logger('dev'));
 app.use(express.json());

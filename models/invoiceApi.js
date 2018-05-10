@@ -3,7 +3,6 @@ var db=require('../dbconnection');
 var invoiceApi={
 
 	getAllInvoices: function(callback){
-		console.log("in invoiceapi");
  		return db.query("select * from Invoices", callback);
 	},
 
