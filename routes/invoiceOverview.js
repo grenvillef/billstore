@@ -4,18 +4,17 @@ var passport = require('passport');
 
 var invoiceApi=require('../models/invoiceApi');
 var invoiceDetails=require('../models/invoiceDetails');
-var postInvoiceApi=require('../models/postInvoiceApi');
 /* GET home page. */
 
-//module.exports = function(app, passport) {
-//router.get('/:customerId?',isLoggedIn, function(req, res, next) {
+module.exports = function(router, passport) {
 
-router.get('/:customerId?', function(req, res, next) {
+router.get('/invoiceOverview', isLoggedIn, function(req, res,next) {
 
-	if (req.params.customerId){
+	console.log(req.user[0].CustomerId);
+//	if (isLoggedIn(req,res,next)){
 
 
-		invoiceApi.getInvoiceByCustomer(req.params.customerId, function(err, rows){
+		invoiceApi.getInvoiceByCustomer(req.user[0].CustomerId, function(err, rows){
 			if (err){
 				res.json(err);
 			}
@@ -23,10 +22,9 @@ router.get('/:customerId?', function(req, res, next) {
 				res.render('invoiceOverview',{invoices: rows} );
 			}
 		});
-	}
+/*	}
 	else{
-
-
+	
 		invoiceApi.getAllInvoices(function(err,rows){
 			if(err){
 				res.json(err);
@@ -39,18 +37,18 @@ router.get('/:customerId?', function(req, res, next) {
 		});
 	}
 
+
+*/
 });
+};
 
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-
     // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-
+	if (req.isAuthenticated())
+  		      return next();
     // if they aren't redirect them to the home page
-    res.redirect('/');
-}
-
-module.exports = router;
+    		res.redirect('/login');
+	}
+//module.exports = router;

@@ -64,14 +64,16 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 app.use(cors());
 
-
+require('./routes/login.js')(app, passport);
+require('./routes/invoiceOverview.js')(app, passport);
+require('./routes/invoiceDetails.js')(app, passport);
 
 // Define the routes
 app.use('/', indexRouter);
-app.use('/login',loginRouter);
+//app.use('/login',loginRouter);
 app.use('/signup',signupRouter);
-app.use('/invoiceOverview',invoiceOverviewRouter);
-app.use('/invoiceDetails',invoiceDetailsRouter);
+//app.use('/invoiceOverview',invoiceOverviewRouter);
+//app.use('/invoiceDetails',invoiceDetailsRouter);
 //app.use('/postInvoiceApi',postInvoiceApi);
 //app.use('/users', usersRouter);
 

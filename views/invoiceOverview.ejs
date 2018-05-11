@@ -4,7 +4,6 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
-console.log("reached invoiceOverview");
 <html>
 	<head>
 		<title>Welcome to BillStore</title>
@@ -31,7 +30,7 @@ console.log("reached invoiceOverview");
 			<section id="banner">
 				<div class="inner">
 					<header>
-						<h1>Welcome to BillStore</h1>
+						<h1>Welcome :</h1><!--%= req.user[0].CustFirstName %-->
 					</header>
 
 					<div class="flex ">
@@ -80,7 +79,8 @@ console.log("reached invoiceOverview");
                                                <tbody>
                                                 <% for(var i=0; i < invoices.length; i++) { %>
                                                <tr>
-	         <td><a href="/InvoiceDetails/<%= invoices[i].InvoiceId %>"><%= invoices[i].InvoiceNumber %> </a></td>
+	         <!--td><a href="/InvoiceDetails/<%= invoices[i].InvoiceId %>"><%= invoices[i].InvoiceNumber %> </a></td-->
+	         <td><%= invoices[i].InvoiceNumber %> </td>
         	 <td><%= invoices[i].InvoiceDate.toDateString() %></td>
          	<td><%= invoices[i].CurrencyCode %></td>
        		  <td><%= invoices[i].TotalAmount %></td>

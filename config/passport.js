@@ -18,13 +18,16 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+
+        done(null, user[0].CustomerId);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-	userApi.getUserByEmail(email, function(err, user){
-            done(err, user);
+	userApi.getUserById(id, function(err, user){
+		console.log("in deserializeUser");
+		console.log(user);
+	        done(err, user);
         });
     });
 
@@ -56,7 +59,6 @@ module.exports = function(passport) {
 		}
             // check to see if theres already a user with that email
             if (!user) {
-		console.log("User is :"+user+"!");
                 return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
             } else {
 		
@@ -64,7 +66,6 @@ module.exports = function(passport) {
 		 req.body.PASSWORD = hashPassword;
 		// save the user
 		userApi.createUser(req.body, function(err){
-			console.log("returned from createUser to passport.js");		
                 	if (err)
                        		 throw err;
                     	return done(null);
@@ -98,25 +99,24 @@ module.exports = function(passport) {
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         userApi.getUserByEmail(req.body.email, function(err, user){
-
-	console.log(user[0].PASSWORD);
+		
             // if there are any errors, return the 
 		if (err){
                 	return done(err);
                 }
-            // check to see if theres already a user with that email
-           	 if (!user) {
+           // check to see if theres already a user with that email
+		
+           	 if (!user.length) {
                 	return done(null, false, req.flash('loginMessage', 'Email id does not exist'));
             	} else {
 
-	//        	console.log("User is :"+user.body.CustFirstName+"!");
-		
+
 			if(!bcrypt.compareSync(password, user[0].PASSWORD)){
 				console.log("Incorrect Password");
 				return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
 			}
 
-		 return done(null, user);
+		 return done(null,user);
                 }
             });
 

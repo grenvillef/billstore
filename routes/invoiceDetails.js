@@ -1,12 +1,20 @@
 var express = require('express');
-var router = express.Router();
+var passport = require('passport');
 var invoiceDetails=require('../models/invoiceDetails');
 
-/* GET home page. */
+var router = express.Router();
 
-router.get('/:InvoiceId?', function(req, res, next) {
+/* GET invoice details */
+module.exports = function(router, passport) {
 
-        if (req.params.InvoiceId){
+console.log("in invoiceDetails before get");
+
+router.get('/invoiceDetails/:InvoiceId?', isLoggedIn, function(req, res, next) {
+
+console.log("in invoiceDetails after get");
+
+
+  //      if (req.params.InvoiceId){
 
 
                 invoiceDetails.getDetailsByInvoice(req.params.InvoiceId, function(err, rows){
@@ -17,7 +25,7 @@ router.get('/:InvoiceId?', function(req, res, next) {
                                 res.render('invoiceDetails',{invoiceDetails: rows} );
                         }
                 });
-        }
+/*        }
         else{
 
                 invoiceDetails.getAllInvoiceDetails(function(err,rows){
@@ -30,10 +38,19 @@ router.get('/:InvoiceId?', function(req, res, next) {
                                 res.render('invoiceDetails',{invoiceDetails: rows} );
                         }
                 });
-        }
+//        }
 
+*/
 });
 
+};
 
+function isLoggedIn(req, res, next) {
+    // if user is authenticated in the session, carry on
+        if (req.isAuthenticated())
+                      return next();
+    // if they aren't redirect them to the home page
+              res.redirect('/login');
+        }
 
-module.exports = router;
+//module.exports = router;
