@@ -10,7 +10,8 @@ module.exports = function(router, passport) {
 
 	router.get('/login', function(req, res, next) {
 
-		res.render('login');
+		res.render('login', { message: req.flash('loginMessage') }); 
+		//res.render('login');
 	        if (err){
 	            res.json(err);
         	}
@@ -21,6 +22,12 @@ module.exports = function(router, passport) {
 	        failureRedirect : '/login', // redirect back to the signup page if there is an error
 	        failureFlash : true // allow flash messages
 	 }));
+
+	router.get('/logout', function(req, res) {
+	        req.logout();
+	        res.redirect('/');
+    });
+
 
 };
 

@@ -16,11 +16,10 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="index.html" class="logo"><strong>BillStore</strong></a>
+					<a href="/index" class="logo"><strong>BillStore</strong></a>
 					<nav id="nav">
-						<a href="index.html">Home</a>
-						<a href="generic.html">Invoices</a>
-						<a href="elements.html">About</a>
+						<a href="/index">Home</a>
+						<a href="/about">About</a>
 					</nav>
 					<a href="navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 				</div>
@@ -39,6 +38,9 @@
 
 					  <!-- LOGIN FORM -->
 
+					 <% if (message.length > 0) { %>
+					        <div class="alert alert-danger"><%= message %></div>
+					 <% } %>
 					 <form action="/login" method="post" enctype="application/x-www-form-urlencoded">
 
                                                 <div class="form-group">

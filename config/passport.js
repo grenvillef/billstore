@@ -107,13 +107,13 @@ module.exports = function(passport) {
            // check to see if theres already a user with that email
 		
            	 if (!user.length) {
-                	return done(null, false, req.flash('loginMessage', 'Email id does not exist'));
+                	return done(null, false, req.flash('loginMessage', 'Sorry, we do not have an account with this email address. Please click on the link further below to sign up'));
             	} else {
 
 
 			if(!bcrypt.compareSync(password, user[0].PASSWORD)){
 				console.log("Incorrect Password");
-				return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+				return done(null, false, req.flash('loginMessage', 'Incorrect email addres / password combination. Please try again'));
 			}
 
 		 return done(null,user);

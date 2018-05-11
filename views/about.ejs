@@ -16,13 +16,12 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="index.html" class="logo"><strong>BillStore</strong></a>
+					<a href="/invoiceOverview" class="logo"><strong>BillStore</strong></a>
 					<nav id="nav">
-						<a href="index.html">Home</a>
-						<a href="generic.html">Invoices</a>
-						<a href="elements.html">About</a>
+						<a href="/invoiceOverview">Home</a>
+						<a href="/about">About</a>
 					</nav>
-					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+					<a href="navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 				</div>
 			</header>
 
@@ -33,28 +32,22 @@
 						<h1>Welcome to BillStore</h1>
 					</header>
 
-					<div class="flex ">
-
 						<div>
-							<span class="icon fa-file-text-o"></span>
-							<h3>View your invoices</h3>
-							<p>Click here to see a complete list of your invoices</p>
+							<h3>Say goodbye to paper receipts. Billstore is a digital vault for all your receipts.</h3>
+							
+							<br><br>
+							<h3> Billstore started in 2018 based on the idea that its 2018 and paper receipts should not exist :-)<h3>					
+							<br><br>
+							<a href="/login" class="button">Click here to sign in</a>
+							<br><br>	
 						</div>
-
-
-						<div>
-							<span class="icon fa-upload"></span>
-							<h3>Upload a new invoice</h3>
-							<p>Add a new invoice in 2 easy steps</p>
-						</div>
-
-					</div>
 
 					<footer>
-						<a href="#" class="button">New to BillStore? Click here to get started</a>
+						<a href="/signup" class="button">New to BillStore? Click here to get started</a>
 					</footer>
 				</div>
 			</section>
+
 
 
 		<!-- Footer -->
@@ -68,6 +61,14 @@
 
 					<form action="#" method="post">
 
+						<div class="field half first">
+							<label for="name">Name</label>
+							<input name="name" id="name" type="text" placeholder="Name">
+						</div>
+						<div class="field half">
+							<label for="email">Email</label>
+							<input name="email" id="email" type="email" placeholder="Email">
+						</div>
 						<div class="field">
 							<label for="message">Message</label>
 							<textarea name="message" id="message" rows="6" placeholder="Message"></textarea>

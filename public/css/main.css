@@ -1981,16 +1981,17 @@
 		-ms-appearance: none;
 		appearance: none;
 		background: #6cc091;
-		border-radius: 10px;
+		border-radius: 5px;
 		border: none;
-		border: solid 2px #8dcca9;
 		color: #fff;
 		display: inline-block;
 		outline: 0;
-		padding: 1em;
+		padding: 0;
 		box-sizing: border-box;
 		text-decoration: none;
-		width: 50%;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 		input[type="text"]:invalid,
