@@ -31,7 +31,6 @@
 				<div class="inner">
 					<header>
 						<h1>Welcome :</h1><!--%= req.user[0].CustFirstName %-->
-						<% console.log('inside invoiceejs') %>
 					</header>
 
 					<div class="flex ">
@@ -71,52 +70,21 @@
                                                             </tr>
                                                       </thead>
                                                <tbody>
-                                                <% for(var i=0; i < invoices.length; i++) { %>
-                                               	<tr>
-						         <td><%= invoices[i].InvoiceNumber %> </td>
-				        		 <td><%= invoices[i].InvoiceDate.toDateString() %></td>
-				         		<td><%= invoices[i].CurrencyCode %></td>
-				       			  <td><%= invoices[i].TotalAmount %></td>
-                                              	 </tr>
-                                                <% } %>
+						 <% for(var i=0; i < invoices.length ; i++) { %>
+
+						<tr>
+							<td><%= invoices[i].InvoiceNumber %> </td>
+							<td><%= invoices[i].InvoiceDate %> </td>
+                                                        <td><%= invoices[i].CurrencyCode %></td>
+                                                          <td><%= invoices[i].TotalAmount %></td>
+                                              	
+						 </tr>
+						<% } %>
 	                                       </tbody>
 
-                                </div>
+	                                </div>
                                 </div>
                         </section>
 
-		<!-- Footer -->
-
-<!-- Removing footer
-
-			<footer id="footer">
-				<div class="inner">
-
-					<h3>Get in touch</h3>
-
-					<form action="#" method="post">
-
-						<div class="field">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
-						</div>
-						<ul class="actions">
-							<li><input value="Send Message" class="button alt" type="submit"></li>
-						</ul>
-					</form>
-
-					<div class="copyright">
-						&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
-					</div>
-
-				</div>
-			</footer>
-
-		<Scripts 
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
--->
 	</body>
 </html>

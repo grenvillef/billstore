@@ -18,15 +18,14 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-
+	console.log("in serializeUser"+user[0].CustomerId);
         done(null, user[0].CustomerId);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
 	userApi.getUserById(id, function(err, user){
-		console.log("in deserializeUser");
-		console.log(user);
+		console.log("in deserializeUser"+user[0].CustomerId);
 	        done(err, user);
         });
     });

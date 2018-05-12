@@ -14,8 +14,6 @@ var session      = require('express-session');
 var morgan      = require('morgan');
 
 
-const { ExpressOIDC } = require('@okta/oidc-middleware');
-
 var logger = require('morgan');
 var cors = require('cors');
 

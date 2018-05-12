@@ -7,7 +7,9 @@ var invoiceApi={
 	},
 
 	getInvoiceByCustomer: function(customerId, callback){
-		return db.query("select * from Invoices, Customer_Invoice_Master where Invoices.InvoiceId = Customer_Invoice_Master.InvoiceId and CustomerId = ?",[customerId],callback);
+
+		var result =  db.query("select * from Invoices where CustomerId = ?",[customerId],callback);
+		return result;
 	}
 };
 

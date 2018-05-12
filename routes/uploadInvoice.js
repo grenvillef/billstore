@@ -17,15 +17,13 @@ router.get('/uploadInvoice', isLoggedIn,function(req, res, next) {
         }
 });
 
-router.post('/uploadInvoice', function (req,res,next) {
-        console.log('in post uploadInvoice');
-        console.log(req.body);
-
-//	 uploadInvoice.createInvoice(req.body, function(err){
-//	       	 if (err)
-  //              	 throw err;
-//        res.render('/invoiceOverview');
-//	});
+router.post('/uploadInvoice',isLoggedIn, function (req,res,next) {
+		
+	 uploadInvoice.createInvoice(req, function(err){
+	       	 if (err)
+	              res.json(err);//	 throw err;
+        res.redirect('/invoiceOverview');
+	});
 
 });
 
@@ -34,7 +32,7 @@ router.post('/uploadInvoice', function (req,res,next) {
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-    // if user is authenticated in the session, carry on
+	// if user is authenticated in the session, carry on
         if (req.isAuthenticated())
                       return next();
     // if they aren't redirect them to the home page

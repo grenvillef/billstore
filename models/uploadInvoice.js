@@ -2,9 +2,11 @@ var db=require('../dbconnection');
 
 var uploadInvoice={
 
-	createInvoice: function(invoice,callback){
-                return db.query("insert into Invoices SET ?",[invoice], callback);
-        }
+	createInvoice: function(req,callback){
+                var result = db.query("insert into Invoices SET ?",[req.body], callback);
+                result = db.query("update Invoices SET CustomerId = ?",[req.user[0].CustomerId], callback);
+        	return result; 
+	}
 
 };
 
