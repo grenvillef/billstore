@@ -16,6 +16,8 @@ router.get('/invoiceOverview', isLoggedIn, function(req, res,next) {
 				res.json(err);
 			}
 			else{
+				res.locals.userName = req.user[0].CustFirstName;
+				console.log(res.locals.userName);
 				res.render('invoiceOverview',{invoices: rows} );
 			}
 		});

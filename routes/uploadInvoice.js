@@ -22,8 +22,9 @@ router.post('/uploadInvoice',isLoggedIn, function (req,res,next) {
 	 uploadInvoice.createInvoice(req, function(err){
 	       	 if (err)
 	              res.json(err);//	 throw err;
-        res.redirect('/invoiceOverview');
 	});
+
+	res.redirect('/invoiceOverview');
 
 });
 

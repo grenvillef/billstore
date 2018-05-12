@@ -18,6 +18,7 @@
 				<div class="inner">
 					<a href="/invoiceOverview" class="logo"><strong>BillStore</strong></a>
 					<nav id="nav">
+						Welcome,<%= userName %> 
 						<a href="/invoiceOverview">Home</a>
 						<a href="/about">About</a>
 						<a href="/logout">Logout</a>
@@ -30,7 +31,7 @@
 			<section id="banner">
 				<div class="inner">
 					<header>
-						<h1>Welcome :</h1><!--%= req.user[0].CustFirstName %-->
+						<h1>Welcome,<%= userName %> </h1>
 						<% console.log('inside invoiceejs') %>
 					</header>
 
@@ -38,7 +39,7 @@
 
 						<div>
 							<span class="icon fa-file-text-o"></span>
-							<h3> View your invoices</h3>
+							<h3><a href="/invoiceOverview">View your invoices</a></h3>
 							<p>Click here to see a complete list of your invoices</p>
 						</div>
 
@@ -73,7 +74,7 @@
                                                <tbody>
                                                 <% for(var i=0; i < invoices.length; i++) { %>
                                                	<tr>
-						         <td><%= invoices[i].InvoiceNumber %> </td>
+						         <td><a href = '/invoiceDetails/<%= invoices[i].InvoiceId %>'><%= invoices[i].InvoiceNumber %> </td>
 				        		 <td><%= invoices[i].InvoiceDate.toDateString() %></td>
 				         		<td><%= invoices[i].CurrencyCode %></td>
 				       			  <td><%= invoices[i].TotalAmount %></td>
