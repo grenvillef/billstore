@@ -39,11 +39,6 @@
 					  <!-- LOGIN FORM -->
 					<form action="/signup" method="post" enctype="application/x-www-form-urlencoded">
 
-						<div class="form-group">
-                                                      <label><font color="white">Choose a User ID</font></label>
-                                                        <input type="text" class="form-control" name="UserID">
-                                                 </div>
-
 
                                                 <div class="form-group">
                                                       <label><font color="white">First Name</font></label>
@@ -58,18 +53,10 @@
                                                  </div>
 
 
-
-                                                <div class="form-group">
-                                                      <label><font color="white">Prefix</font></label>
-                                                        <input type="text" class="form-control" name="CustNamePrefix">
-                                                 </div>
-
-
 						<div class="form-group">
                                                       <label><font color="white">Email address</font></label>
-                                                        <input type="text" class="form-control" name="CustEmailAddress">
+                                                        <input type="email" class="form-control" name="CustEmailAddress">
                                                  </div>
-
 
 
                                                 <div class="form-group">
@@ -92,7 +79,13 @@
 
                                                 <div class="form-group">
                                                       <label><font color="white">Country Code</font></label>
-                                                        <input type="text" class="form-control" name="CustCountryCode">
+							<select name="CustCountryCode">
+								<option value="NL">Netherlands</option>
+								<option value="BE">Belgium</option>
+								<option value="DE">Germany</option>
+								<option value="FR">France</option>
+								<option value="UK">United Kingdom</option>
+							</select>
                                                  </div>
 
 
@@ -119,8 +112,13 @@
 
 
                                                 <div class="form-group">
+
                                                       <label><font color="white">Customer Type</font></label>
-                                                        <input type="text" class="form-control" name="CustType">
+
+  					 		<select name="CustType">
+                                                                <option value="NL">Basic</option>
+                                                                <option value="BE">Premium</option>
+                                                        </select>
                                                  </div>
 
 
