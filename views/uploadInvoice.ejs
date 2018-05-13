@@ -35,7 +35,8 @@
 					</header>
 
 					<!--div class="flex "-->
-
+					
+					<%= locvarCustFirstName %>
 					  <!-- LOGIN FORM -->
 					<form action="/uploadInvoice" method="post" enctype="application/x-www-form-urlencoded">
 
@@ -43,6 +44,8 @@
                                                       <label><font color="white">Invoice Number</font></label>
                                                         <input type="text" class="form-control" name="invoiceNumber">
                                                  </div>
+	
+						<input type="hidden" id="CustomerId" name="CustomerId" value=<%=locvarCustomerId%>>
 
 
                                                 <div class="form-group">

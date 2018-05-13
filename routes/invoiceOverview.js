@@ -9,15 +9,16 @@ var invoiceDetails=require('../models/invoiceDetails');
 module.exports = function(router, passport) {
 
 router.get('/invoiceOverview', isLoggedIn, function(req, res,next) {
-		console.log('in invoiceOverview'+ typeof(req.user[0].CustomerId));
+		console.log('in invoiceOverview'+ req.user[0].CustomerId);
 
 		invoiceApi.getInvoiceByCustomer(req.user[0].CustomerId, function(err, rows){
 			if (err){
 				res.json(err);
 			}
 			else{
-				res.locals.userName = req.user[0].CustFirstName;
-				console.log(res.locals.userName);
+				router.locals.locvarCustFirstName = req.user[0].CustFirstName;
+				router.locals.locvarCustomerId = req.user[0].CustomerId;
+			//	console.log(res.locals.locvarCustomerId);
 				res.render('invoiceOverview',{invoices: rows} );
 			}
 		});
