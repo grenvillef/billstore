@@ -45,7 +45,33 @@ router.post('/uploadInvoice/file',isLoggedIn, function (req,res,next) {
 	fs.readFile(req.files.path, function (err, data) {
 		  if (err) throw err;
 	});
-*/	res.redirect('/invoiceOverview');
+*/
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'grenville@gmail.com',
+    pass: 'GUNUferns01'
+  }
+});
+
+var mailOptions = {
+  from: 'grenville@gmail.com',
+  to: 'grenville@gmail.com',
+  subject: 'New Invoice Uploaded',
+  text: 'Your invoice was uploaded successfully!'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+
+	res.redirect('/invoiceOverview');
 
 
 });
