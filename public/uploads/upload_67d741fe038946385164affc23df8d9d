@@ -1,0 +1,70 @@
+JIRA integration in phase 3
+
+Action: Alex to verify OIS covers all attributes for a new external entry
+Action: Martin will check if for GCS new entry can only be done by HR
+
+Action: Grenville to check with Vincent / Sebastien if GCS AD naming conventions can be applied to group
+
+Info: email address will be used to link employee to AD
+
+Action: Alex to check how surname prefixes (e.g: "van" ) will be entered in SAP HR
+
+Action: Sinan to check if two email boxes are needed when Group moves to O365
+
+Action: Grenville to discuss with Sebastien about "Identity Approver" term. PErhaps language solution?
+
+Info: EIT should have access to enter phone numbers in AD
+
+Action: Change validFrom and validTo to "Start Date" and "End Date"
+
+Info: Alex to confirmed that there is no maximum contract duration for externals currently
+
+Info: Contractual end date will be used as default "End Date". If exit date is earlier then HR will update "End date". 
+
+Action: Martin to add a new field "Contractual End Date" which will be for information only. 
+
+Action: Purchase Order is not mandatory
+
+Action: Add PES done - yes / no? Is it available in SAP HR, if not HR will administer in OIS.
+
+Action: Martin to design solution to overwrite SAP upload where an external is a manager
+
+Info: Old manager will not be involved in re-certification for movers. New manager can authorise access to old systems
+
+Action: Martin to investigate if an additional step to add old manager to the recertification process
+Action: Notification interval 60, 40, 20, 10
+
+Action: No automatic disable if recertification not done on time
+
+Info: service accounts are mapped to a "technical identity". recertification goes to the application owner
+
+Info: Agreed that anyone can request any access (approvals will be in place)
+
+Info: Agreed that "run policy check" will be optional to begin with
+
+Info: Rejection of access requests - no notification to requestor
+
+Future - application Onboarding process, SoD process
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OIS only for externals possible for GC?

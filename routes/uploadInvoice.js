@@ -30,27 +30,22 @@ router.post('/uploadInvoice',isLoggedIn, function (req,res,next) {
 });
 
 router.post('/uploadInvoice/file',isLoggedIn, function (req,res,next) {
-/*
-         uploadInvoice.createInvoice(req, function(err){
-                 if (err)
-                      res.json(err);//   throw err;
-        });
-
- */
 
 	var form = new formidable.IncomingForm();
-//	form.uploadDir = 'public/uploads';
+	form.uploadDir = 'public/uploads';
 	
 	form.keepExtensions = false;
 	
 	form.parse(req, function (err, fields, files) {
-	files.path = 'public/uploads/test.text'	
 		if (err) 
 			res.json(err);
 	        console.log('File uploaded and moved!');
 	});
-
-	res.redirect('/invoiceOverview');
+/*
+	fs.readFile(req.files.path, function (err, data) {
+		  if (err) throw err;
+	});
+*/	res.redirect('/invoiceOverview');
 
 
 });

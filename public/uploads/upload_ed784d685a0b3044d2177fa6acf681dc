@@ -1,0 +1,8 @@
+Which environments for each system
+Is levels of access in scope (currently some systems are binary in access methods)
+Risk of external control (messup by Hitachi impacts us no revert?)
+What is the backup plan if solution is unavailable
+Is it really a good idea to put such a high risk system in the cloud?
+Access to SVN and Git, Jenkins
+Impact of Devops implementation (Finops) on SoD, etc.
+Access to staging (collaboration with UAT, more autonomy) - Impact?
