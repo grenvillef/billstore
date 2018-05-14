@@ -1987,12 +1987,11 @@
 		color: #fff;
 		display: inline-block;
 		outline: 0;
-		padding: 0.25em;
+		padding: 0;
 		box-sizing: border-box;
 		text-decoration: none;
-		text-align: left;
-		width: auto;
-		margin: 1em;
+		width: 100%;
+		margin: 0 1em;
 	}
 
 		input[type="text"]:invalid,
@@ -2038,7 +2037,7 @@
 			pointer-events: none;
 			position: absolute;
 			right: 0;
-			text-align: center;
+			text-align: left;
 			top: 0;
 			width: 2.75em;
 		}
@@ -2950,7 +2949,7 @@
 			border-top: 2px solid rgba(255, 255, 255, 0.2);
 			position: relative;
 			z-index: 10005;
-			padding-top: 8em;
+			padding-top: 4em;
 		}
 
 		#banner h1 {
@@ -3001,7 +3000,7 @@
 				}
 
 				#banner .flex div:first-child {
-					padding-left: 0;
+				/*	padding-left: 4em;*/
 				}
 
 				#banner .flex div p {
