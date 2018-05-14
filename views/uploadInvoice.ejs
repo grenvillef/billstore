@@ -37,6 +37,19 @@
 					<!--div class="flex "-->
 					
 					  <!-- LOGIN FORM -->
+
+					<form action="/uploadInvoice/file" method="post" enctype="multipart/form-data">
+						 <div class="form-group">
+                                                      <label><font color="white">Upload an invoice</font></label>
+                                                        <input type="file" class="form-control" name="invoiceFile">
+                                                 </div>
+			  			<div> 
+			                       <button type="submit" class="btn btn-warning btn-lg">Upload Invoice</button>
+						</div>
+
+					</form>
+
+
 					<form action="/uploadInvoice" method="post" enctype="application/x-www-form-urlencoded">
 
 						<div class="form-group">

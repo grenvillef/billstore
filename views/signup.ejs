@@ -34,28 +34,28 @@
 						<h3>To create your account, please enter this basic infomration</h1>
 					</header>
 
-					<!--div class="flex "-->
+					<div class="flex ">
 
 					  <!-- LOGIN FORM -->
 					<form action="/signup" method="post" enctype="application/x-www-form-urlencoded">
 
 
                                                 <div class="form-group">
-                                                      <label><font color="white">First Name</font></label>
-                                                        <input type="text" class="form-control" name="CustFirstName">
+                                                      <label><font color="white">First Name *</font></label>
+                                                        <input type="text" class="form-control" name="CustFirstName" required>
                                                  </div>
 
 
 
                                                 <div class="form-group">
-                                                      <label><font color="white">Last Name</font></label>
-                                                        <input type="text" class="form-control" name="CustLastName">
+                                                      <label><font color="white">Last Name *</font></label>
+                                                        <input type="text" class="form-control" name="CustLastName" required>
                                                  </div>
 
 
 						<div class="form-group">
-                                                      <label><font color="white">Email address</font></label>
-                                                        <input type="email" class="form-control" name="CustEmailAddress">
+                                                      <label><font color="white">Email address *</font></label>
+                                                        <input type="email" class="form-control" name="CustEmailAddress" required>
                                                  </div>
 
 
@@ -109,10 +109,7 @@
                                                         <input type="text" class="form-control" name="CustState">
                                                  </div>
 
-
-
                                                 <div class="form-group">
-
                                                       <label><font color="white">Customer Type</font></label>
 
   					 		<select name="CustType">
@@ -123,8 +120,8 @@
 
 
 					        <div class="form-group">
-						      <label><font color="white">Create a Password</font></label>
-						            <input type="password" class="form-control" name="PASSWORD">
+						      <label><font color="white">Create a Password *</font></label>
+						            <input type="password" class="form-control" name="PASSWORD" required>
 					        </div>
 
 					        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
@@ -133,7 +130,7 @@
 
 
 
-					<!--/div-->
+					</div>
 
 					<footer>
 						<a href="/login" class="button">Already have an account. Click here to log in </a>

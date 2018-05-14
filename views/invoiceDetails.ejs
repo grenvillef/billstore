@@ -63,11 +63,12 @@
 <						<table class="table table-inverse">
       							<thead>
         							<tr>
-							          <th>InvoiceLineId</th>
-							          <th>ProductId</th>
-							          <th>UnitPrice</th>
+							          <th>Invoice Line Id</th>
+							          <th>Product Id</th>
+							          <th>Product Description</th>
+							          <th>Unit Price</th>
 							          <th>Quantity</th>
-							          <th>TotalLineAmount</th>
+							          <th>Total Line Amount</th>
 
        								 </tr>
 						      </thead>
@@ -78,6 +79,7 @@
 
          <td><%= invoiceDetails[i].InvoiceLineId %></td>
          <td><%= invoiceDetails[i].ProductId %></td>
+         <td><%= invoiceDetails[i].ProductDescription %></td>
          <td><%= invoiceDetails[i].UnitPrice %></td>
          <td><%= invoiceDetails[i].Quantity %></td>
          <td><%= invoiceDetails[i].TotalLineAmount %></td>

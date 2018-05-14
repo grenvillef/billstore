@@ -1,9 +1,10 @@
 var express = require('express');
 var passport = require('passport');
 var uploadInvoice = require('../models/uploadInvoice');
+var fs = require('fs');
+var formidable = require('formidable');
 
 var router = express.Router();
-
 
 module.exports = function(router, passport) {
 
@@ -25,6 +26,32 @@ router.post('/uploadInvoice',isLoggedIn, function (req,res,next) {
 	});
 
 	res.redirect('/invoiceOverview');
+
+});
+
+router.post('/uploadInvoice/file',isLoggedIn, function (req,res,next) {
+/*
+         uploadInvoice.createInvoice(req, function(err){
+                 if (err)
+                      res.json(err);//   throw err;
+        });
+
+ */
+
+	var form = new formidable.IncomingForm();
+//	form.uploadDir = 'public/uploads';
+	
+	form.keepExtensions = false;
+	
+	form.parse(req, function (err, fields, files) {
+	files.path = 'public/uploads/test.text'	
+		if (err) 
+			res.json(err);
+	        console.log('File uploaded and moved!');
+	});
+
+	res.redirect('/invoiceOverview');
+
 
 });
 

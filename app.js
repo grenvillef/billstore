@@ -12,7 +12,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var morgan      = require('morgan');
-
+var formidable = require('formidable');
 
 var logger = require('morgan');
 var cors = require('cors');
@@ -31,6 +31,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.set('uploads', path.join(__dirname, 'public/uploads'));
 app.set('view engine', 'ejs');
 
 
