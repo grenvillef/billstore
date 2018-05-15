@@ -51,13 +51,13 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'grenville@gmail.com',
+    user: 'noreply.billstore@gmail.com',
     pass: 'GUNUferns01'
   }
 });
 
 var mailOptions = {
-  from: 'grenville@gmail.com',
+  from: 'noreply.billstore@gmail.com',
   to: 'grenville@gmail.com',
   subject: 'New Invoice Uploaded',
   text: 'Your invoice was uploaded successfully!'
