@@ -1,5 +1,6 @@
 // config/passport.js
 var userApi=require('../models/userApi');
+var sendEmail=require('../models/sendEmail');
 var bcrypt = require('bcrypt-nodejs');
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
@@ -57,25 +58,33 @@ module.exports = function(passport) {
 	                return done(err);
 		}
             // check to see if theres already a user with that email
-            if (!user) {
-                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-            } else {
+
+        if (!user) {
+        	return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+        } else {
 		
-                 var hashPassword = bcrypt.hashSync(req.body.PASSWORD, bcrypt.genSaltSync(8),null);
-		 req.body.PASSWORD = hashPassword;
+        	var hashPassword = bcrypt.hashSync(req.body.PASSWORD, bcrypt.genSaltSync(8),null);
+		req.body.PASSWORD = hashPassword;
 		// save the user
 		userApi.createUser(req.body, function(err){
                 	if (err)
                        		 throw err;
-                    	return done(null);
-                });
-            }
+                	else {
+				sendEmail.newUser(req.body.CustEmailAddress, function(err) {
+					if (err)
+						throw err;
+				});			
+			 	return done(null);
+
+        		}
+	        });
+         }
 
         });    
 
         });
 
-    }));	
+   }));	
 
  // =========================================================================
     // LOCAL LOGIN =============================================================
