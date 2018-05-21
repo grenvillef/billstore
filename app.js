@@ -6,7 +6,9 @@ var path = require('path');
 var helpers = require('express-helpers')(app);
 
 var passport = require('passport');
+
 require('./config/passport')(passport); 
+
 var flash    = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -16,6 +18,9 @@ var formidable = require('formidable');
 
 var logger = require('morgan');
 var cors = require('cors');
+
+
+var bankConnectRouter = require('./routes/bankConnect');
 
 
 var indexRouter = require('./routes/index');
@@ -69,10 +74,11 @@ require('./routes/invoiceDetails.js')(app, passport);
 require('./routes/about.js')(app, passport);
 require('./routes/uploadInvoice.js')(app, passport);
 
+
+
+app.use('/bankConnect',bankConnectRouter);
 app.use('/', indexRouter);
 app.use('/signup',signupRouter);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -94,36 +100,6 @@ app.use(function(err, req, res, next) {
 //  res.render('error');
 });
 
-
-
-/*
-
-const oidc = new ExpressOIDC({
-  issuer: 'https://dev-360153.oktapreview.com/oauth2/default',
-  client_id: '0oaewznt08Twwz0ZX0h7',
-  client_secret: 'RWz2iBs9PMBDKzX0U0GMB9sYPCWaLHGZIirfWiXO',
-  redirect_uri: 'http://ec2-35-180-74-148.eu-west-3.compute.amazonaws.com:3000/invoiceOverview',
-  scope: 'openid profile'
-});
-
-app.use(stormpath.init(app, {
-  application: {
-    href: process.env['STORMPATH_APPLICATION_HREF']},
-  web: {
-    login: {
-      nextUri: '/invoiceOverview',
-    },
-    oauth2: {
-      client_credentials: {
-        accessToken: {
-          ttl: 3600
-        }
-      }
-    }
-  }
-}));
-
-*/
 
 module.exports = app;
 
