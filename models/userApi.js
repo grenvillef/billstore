@@ -12,6 +12,9 @@ var user={
 	
 	createUser: function(newUser,callback){
                 return db.query("insert into Customers SET ?",[newUser], callback);
+        },
+	createGoogleUser: function(newUser,callback){
+                return db.query("insert into Customers SET ?",[newUser], callback);
         }
 
 };

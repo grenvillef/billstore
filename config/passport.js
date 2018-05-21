@@ -161,49 +161,40 @@ module.exports = function(passport) {
                 		}
 	          	 // check to see if theres already a user with that email
 
-	                	if (!user.length) {
-        		        	return done(null, false, req.flash('loginMessage', 'Sorry, we do not have an account with this email address. Please click on the link further below to sign up'));
-               			} else {
+	                	if (user.length) {
 					return done(null,user);
+               			} else {
+			
+					var newGoogleUser = {
+						CustEmailAddress:profile.emails[0].value,
+						CustFirstName:profile.displayName,
+						CustGoogleToken:token,
+						CustGoogleId:profile.Id
+					};
+
+					userApi.createGoogleUser(newGoogleUser, function(err){
+				
+			        		// try to find the user based on their google id
+						if (err)
+							return done(err);
+						else{
+			     				userApi.getUserByEmail(newGoogleUser.CustEmailAddress, function(err, user){
+						                if (user) {
+                  				// if a user is found, log them in
+						               		 return done(null, user);
+			               				 } else {
+									 return done(err);
+								}
+							});
+						}
+					});
 				}
+ 			});
+	              
+           	 });		
+        }
 
-
-
-
-/*            // try to find the user based on their google id
-            User.findOne({ 'google.id' : profile.id }, function(err, user) {
-                if (err)
-                    return done(err);
-
-                if (user) {
-
-                    // if a user is found, log them in
-                    return done(null, user);
-                } else {
-                    // if the user isnt in our database, create a new user
-       
-
-
-	             var newUser          = new User();
-
-                    // set all of the relevant information
-                    newUser.google.id    = profile.id;
-                    newUser.google.token = token;
-                    newUser.google.name  = profile.displayName;
-                    newUser.google.email = profile.emails[0].value; // pull the first email
-
-                    // save the user
-                    newUser.save(function(err) {
-                        if (err)
-                            throw err;
-                        return done(null, newUser);
-                    });
-                }
-*/            });
-        });
-
-    }));
-
+    ));
 
 };
-//
+

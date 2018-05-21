@@ -27,9 +27,9 @@ module.exports = function(router, passport) {
 
     // the callback after google has authenticated the user
 	router.get('/auth/google/callback',
-            passport.authenticate('google', {
-                    successRedirect : '/invoiceOveview',
-                    failureRedirect : '/'
+        	passport.authenticate('google', {
+                	successRedirect : '/invoiceOveview',
+                	failureRedirect : '/login'
         }));
 
 
