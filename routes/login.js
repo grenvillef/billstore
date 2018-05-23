@@ -23,18 +23,39 @@ module.exports = function(router, passport) {
     // send to google to do the authentication
     // profile gets us their basic information including their name
     // email gets their emails
-	router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+	router.get('/auth/google', 
+		passport.authenticate('google', 
+			{ scope : ['profile', 'email'] }
+	));
 
-    // the callback after google has authenticated the user
+
 	router.get('/auth/google/callback',
-        	passport.authenticate('google', {
-                	successRedirect : '/invoiceOveview',
-                	failureRedirect : '/login'
-        }));
+            passport.authenticate('google', {
+                    successRedirect : '/invoiceOverview',
+                    failureRedirect : '/login'
+            }));
+
+/*
+
+	 router.get('/auth/google/callback', function(req,res,next) {
+                console.log('in callback before authenticate');
+                passport.authenticate('google',function(err, user, info){
+                        console.log('in callback passport authenticate');
+                         if (err) { return res.send({'status':'err','message':err.message}); }
+
+                         if (!user) { return res.send({'status':'fail','message':info.message}); }
+
+                         req.logIn(user, function(err) {
+                                if (err) { return res.send({'status':'err','message':err.message}); }
+                                return res.send({'status':'ok'});
+                         });
+                        })(req, res, next);
 
 
+        });
 
 
+*/
 
 	router.post('/login', passport.authenticate('local-login', {
         	successRedirect : '/invoiceOverview', // redirect to the secure profile section

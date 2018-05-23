@@ -26,11 +26,16 @@ router.post('/uploadInvoice',isLoggedIn, function (req,res,next) {
 	        	res.json(err);//	 throw err;
 		else	{
 			console.log('before sendEmail');
+			console.log(req.user.email);
+			sendEmail.invoiceUpload('grenville@gmail.com',function(err){
+				if (err)
+					res.json(err);
+			});
+			res.redirect('/invoiceOverview');
 
 		}
 	});
 
-	res.redirect('/invoiceOverview');
 
 });
 

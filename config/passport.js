@@ -137,6 +137,62 @@ module.exports = function(passport) {
 
     }));
 
+/*
+ passport.use(new GoogleStrategy({
+
+        clientID        : configAuth.googleAuth.clientID,
+        clientSecret    : configAuth.googleAuth.clientSecret,
+        callbackURL     : configAuth.googleAuth.callbackURL,
+
+    },
+    function(token, refreshToken, profile, done) {
+	console.log('entered this time');
+        // make the code asynchronous
+        // User.findOne won't fire until we have all our data back from Google
+
+  	userApi.getUserByEmail('grenville@gmail.com', function(err, user){
+
+                        // if there are any errors, return the
+                                if (err){
+                                        return done(err);
+                                }
+				else
+					return done(null, user);
+	});
+           
+
+		 // try to find the user based on their google id
+            User.findOne({ 'google.id' : profile.id }, function(err, user) {
+                if (err)
+                    return done(err);
+
+                if (user) {
+
+                    // if a user is found, log them in
+                    return done(null, user);
+                } else {
+                    // if the user isnt in our database, create a new user
+                    var newUser          = new User();
+
+                    // set all of the relevant information
+                    newUser.google.id    = profile.id;
+                    newUser.google.token = token;
+                    newUser.google.name  = profile.displayName;
+                    newUser.google.email = profile.emails[0].value; // pull the first email
+
+                    // save the user
+                    newUser.save(function(err) {
+                        if (err)
+                            throw err;
+                        return done(null, newUser);
+                    });
+                }
+        });
+
+    }));
+
+*/
+
 //Google Login
 
 	passport.use(new GoogleStrategy({
@@ -147,54 +203,68 @@ module.exports = function(passport) {
 
     	},
 	function(token, refreshToken, profile, done) {
+	
+		console.log('in google auth');
+  	
+		userApi.getUserByEmail(profile.emails[0].value, function(err, user){
+	
 
-        // make the code asynchronous
+                        // if there are any errors, return the
+                	if (err){
+	                	return done(err);
+                	}
+      // make the code asynchronous
         // User.findOne won't fire until we have all our data back from Google
-        	process.nextTick(function() {
 
-			console.log(profile.id);
-			userApi.getUserByEmail(profile.id, function(err, user){
+
+        		process.nextTick(function() {
+	
+				userApi.getUserByEmail(profile.emails[0].value, function(err, user){
+
 
         		// if there are any errors, return the
-                		if (err){
-                        		return done(err);
-                		}
+                			if (err){
+                        			return done(err);
+                			}
 	          	 // check to see if theres already a user with that email
 
-	                	if (user.length) {
-					return done(null,user);
-               			} else {
+	                		if (user.length) {
+						console.log(user.CustEmailAddress);
+						return done(null,user);
+               				} else {
 			
-					var newGoogleUser = {
-						CustEmailAddress:profile.emails[0].value,
-						CustFirstName:profile.displayName,
-						CustGoogleToken:token,
-						CustGoogleId:profile.Id
-					};
-
-					userApi.createGoogleUser(newGoogleUser, function(err){
+						var newGoogleUser = {
+							'CustEmailAddress':profile.emails[0].value,
+							'CustFirstName':profile.displayName,
+							'CustGoogleToken':token,
+							'CustGoogleId':profile.id
+						};
+				
+						console.log(newGoogleUser);
+						userApi.createGoogleUser(newGoogleUser, function(err){
 				
 			        		// try to find the user based on their google id
-						if (err)
-							return done(err);
-						else{
-			     				userApi.getUserByEmail(newGoogleUser.CustEmailAddress, function(err, user){
-						                if (user) {
+							if (err)
+								return done(err);
+							else{
+			     					userApi.getUserByEmail(newGoogleUser.CustEmailAddress, function(err, user){
+							                if (user) {
                   				// if a user is found, log them in
-						               		 return done(null, user);
-			               				 } else {
-									 return done(err);
-								}
-							});
-						}
-					});
-				}
- 			});
+							               		 return done(null, user);
+			               					 } else {
+										 return done(err);
+									}
+								});
+							}
+					
+						});
+					}
+ 				});
 	              
-           	 });		
-        }
-
-    ));
+           	 	});		
+	
+		});
+ 	}));
 
 };
 
