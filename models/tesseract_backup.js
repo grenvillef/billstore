@@ -1,6 +1,6 @@
 var tesseract = require('node-tesseract');
 
-tesseract.process('testimages/out.png', (err, text) => {
+tesseract.process('./models/testimages/out.png', (err, text) => {
     if(err){
         return console.log("An error occured: ", err);
     }

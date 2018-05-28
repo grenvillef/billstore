@@ -11,7 +11,6 @@ module.exports = function(router, passport) {
 	router.get('/login', function(req, res, next) {
 
 		res.render('login', { message: req.flash('loginMessage') }); 
-		//res.render('login');
 	        if (err){
 	            res.json(err);
         	}
@@ -35,27 +34,6 @@ module.exports = function(router, passport) {
                     failureRedirect : '/login'
             }));
 
-/*
-
-	 router.get('/auth/google/callback', function(req,res,next) {
-                console.log('in callback before authenticate');
-                passport.authenticate('google',function(err, user, info){
-                        console.log('in callback passport authenticate');
-                         if (err) { return res.send({'status':'err','message':err.message}); }
-
-                         if (!user) { return res.send({'status':'fail','message':info.message}); }
-
-                         req.logIn(user, function(err) {
-                                if (err) { return res.send({'status':'err','message':err.message}); }
-                                return res.send({'status':'ok'});
-                         });
-                        })(req, res, next);
-
-
-        });
-
-
-*/
 
 	router.post('/login', passport.authenticate('local-login', {
         	successRedirect : '/invoiceOverview', // redirect to the secure profile section

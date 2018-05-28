@@ -67,6 +67,7 @@
                                                                   <th>Transaction Date</th>
                                                                   <th>Currency</th>
                                                                   <th>Amount</th>
+                                                                  <th>Invoice Scan</th>
 
                                                             </tr>
                                                       </thead>
@@ -77,6 +78,8 @@
 				        		 <td><%= invoices[i].InvoiceDate.toDateString() %></td>
 				         		<td><%= invoices[i].CurrencyCode %></td>
 				       			  <td><%= invoices[i].TotalAmount %></td>
+							  <td> <span class="icon fa-file-text-o" onclick="openNav()"></span> </td>
+
                                               	 </tr>
                                                 <% } %>
 	                                       </tbody>
@@ -84,6 +87,32 @@
                                 </div>
                                 </div>
                         </section>
+
+<div id="myNav" class="overlay">
+
+<a href="javascript:void(0)" class="btnclose" onclick="closeNav()">[ X ] Close</a>
+
+  <!-- Button to close the overlay navigation -->
+
+	<div class="overlay-content">
+
+		<img src="/images/invoiceScan_1_7.jpg">
+	</div>
+
+</div>
+
+<!-- Use any element to open/show the overlay navigation menu -->
+
+
+<script>
+function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+}
+
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}
+</script>
 
 		<!-- Footer -->
 

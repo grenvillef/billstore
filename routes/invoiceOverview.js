@@ -18,7 +18,6 @@ router.get('/invoiceOverview', isLoggedIn, function(req, res,next) {
 			else{
 				router.locals.locvarCustFirstName = req.user[0].CustFirstName;
 				router.locals.locvarCustomerId = req.user[0].CustomerId;
-			//	console.log(res.locals.locvarCustomerId);
 				res.render('invoiceOverview',{invoices: rows} );
 			}
 		});

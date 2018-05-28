@@ -41,10 +41,10 @@ var apiHost = "https://psd2-api.openbankproject.com";
 
 console.log ("apiHost is: " + apiHost);
 
-var _openbankConsumerKey = "bbmpzcfstxommod0gd2qipqiffguirvtezvt0tpt";
+var _openbankConsumerKey = "t522cxzo1pcrvt35yfzpi15l5zbfekxoned3v3te";
 
-var _openbankConsumerSecret = "2wxolzkaqw5qcdih2grqvngqpdgnqptzmf50ugh3";
-var _openbankRedirectUrl = "www.billstore.nl:3000/invoiceOverview";
+var _openbankConsumerSecret = "yckfbh4f53eczzkljylo3nuuede11j5u2miwjez4";
+var _openbankRedirectUrl = "www.billstore.nl:3000/bankConnect/callback";
 
 
 var cookieParser = require('cookie-parser');
@@ -85,6 +85,7 @@ router.get('/', function(req, res, next) {
 
      			req.session.oauthRequestToken = oauthToken;
  	        	req.session.oauthRequestTokenSecret = oauthTokenSecret;
+			console.log(req.session);
 			res.redirect(apiHost + "/oauth/authorize?oauth_token="+req.session.oauthRequestToken);
     		}
   	});
@@ -104,7 +105,7 @@ router.get('/callback', function(req, res){
         //error is now undefined
         req.session.oauthAccessToken = oauthAccessToken;
         req.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
-        res.redirect('/signed_in');
+        res.redirect('/invoiceOverview');
       }
     }
   );
