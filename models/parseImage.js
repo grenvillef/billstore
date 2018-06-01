@@ -10,7 +10,7 @@ var options = {
 
 };
 
-tesseract.process('../models/testimages/ah.jpg',options, (err, text) => {
+tesseract.process('../models/testimages/ah2_1.jpg',options, (err, text) => {
     if(err){
         return console.log("An error occured: ", err);
     }
@@ -20,5 +20,5 @@ tesseract.process('../models/testimages/ah.jpg',options, (err, text) => {
     console.log(text);
 
 	console.log("Total price is");
-	console.log(text.substring(text.indexOf('TQT AAL')+8,text.indexOf('TQT AAL')+15));
+	console.log(text.substring(text.indexOf('\nTOTAAL')+8,text.indexOf('\nTOTAAL')+15));
 });
