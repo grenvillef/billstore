@@ -10,7 +10,7 @@ var options = {
 
 };
 
-tesseract.process('../models/testimages/ah2_1.jpg',options, (err, text) => {
+tesseract.process('../models/testimages/ah.jpg',options, (err, text) => {
     if(err){
         return console.log("An error occured: ", err);
     }
