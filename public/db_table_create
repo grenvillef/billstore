@@ -116,6 +116,23 @@ CREATE TABLE OrderItem
   REFERENCES Invoice_Lines(InvoiceLineId, InvoiceId)
 );
 
+CREATE TABLE BankTransactions
+(
+ TransactionId      INT AUTO_INCREMENT NOT NULL ,
+ CustomerId	    CHAR NOT NULL,
+ BankTransactionId  NVARCHAR(20) NOT NULL ,
+ BankCode           CHAR(4) NOT NULL ,
+ TransactionDate    DATETIME NOT NULL  ,
+ Amount             DECIMAL(12,2) NOT NULL ,
+ CurrencyCode       NVARCHAR(3) NOT NULL ,
+ TransactionType    NVARCHAR(20) NOT NULL ,
+
+ CONSTRAINT PK_TransactionId PRIMARY KEY CLUSTERED (TransactionId ASC),
+ CONSTRAINT FK_CustomerId FOREIGN KEY (CustomerId) 
+  REFERENCES Customers(CustomerId)
+);
+
+
 insert into Customers values (1 , 'grenville' ,'Grenville' ,'Fernandes' , 'Mr' ,'grenville@gmail.com' ,'Fideliolaan 115' ,'Address Line 2' ,'Address Line 3' ,'NL','1183PK','Amstelveen','NH' ,
 'BASIC'); 
 
