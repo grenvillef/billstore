@@ -6,52 +6,10 @@
 -->
 <html>
 	<head>
-		<title>Welcome to BillStore</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="/css/main.css" />
+		<% include ./partials/header %>
 	</head>
 	<body>
-
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="/invoiceOverview" class="logo"><strong>BillStore</strong></a>
-					<nav id="nav">
-						Welcome,<%= locvarCustFirstName %> 
-						<a href="/invoiceOverview">Home</a>
-						<a href="/about">About</a>
-						<a href="/logout">Logout</a>
-					</nav>
-					<a href="navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-				</div>
-			</header>
-
-		<!-- Banner -->
-			<section id="banner">
-				<div class="inner">
-					<header>
-						<h1>Welcome,<%= locvarCustFirstName %> </h1>
-					</header>
-
-					<div class="flex ">
-
-						<div>
-							<span class="icon fa-file-text-o"></span>
-							<h3><a href="/invoiceOverview">View your invoices</a></h3>
-							<p>Click here to see a complete list of your invoices</p>
-						</div>
-
-
-						<div>
-							<span class="icon fa-upload"></span>
-							<h3><a href="/uploadInvoice">Upload a new invoice</a></h3>
-						</div>
-
-					</div>
-
-				</div>
-			</section>
+		<% include ./partials/mainBanner %>
 
 
 	         <section id="invoices" class="wrapper align-center">
@@ -79,27 +37,35 @@
 				         		<td><%= invoices[i].CurrencyCode %></td>
 				       			  <td><%= invoices[i].TotalAmount %></td>
 							  <td> <span class="icon fa-file-text-o" onclick="openNav()"></span> </td>
-
                                               	 </tr>
                                                 <% } %>
 	                                       </tbody>
 
+	                                </div>
                                 </div>
-                                </div>
-                        </section>
+                </section>
 
-<div id="myNav" class="overlay">
+			<div id="myNav" class="overlay">
 
-<a href="javascript:void(0)" class="btnclose" onclick="closeNav()">[ X ] Close</a>
+				<a href="javascript:void(0)" class="btnclose" onclick="closeNav()">[ X ] Close</a>
 
-  <!-- Button to close the overlay navigation -->
+				  <!-- Button to close the overlay navigation -->
 
-	<div class="overlay-content">
+				<div class="overlay-content">
 
-		<img src="/images/invoiceScan_1_7.jpg">
-	</div>
+					<img src="/images/invoiceScan_1_7.jpg">
+				</div>
 
-</div>
+			</div>
+
+
+		<!-- Footer -->
+		<footer>
+			<% include ./partials/footer %>
+		</footer>
+
+
+	</body>
 
 <!-- Use any element to open/show the overlay navigation menu -->
 
@@ -108,44 +74,10 @@
 function openNav() {
     document.getElementById("myNav").style.width = "100%";
 }
-
 function closeNav() {
     document.getElementById("myNav").style.width = "0%";
 }
 </script>
 
-		<!-- Footer -->
 
-<!-- Removing footer
-
-			<footer id="footer">
-				<div class="inner">
-
-					<h3>Get in touch</h3>
-
-					<form action="#" method="post">
-
-						<div class="field">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="6" placeholder="Message"></textarea>
-						</div>
-						<ul class="actions">
-							<li><input value="Send Message" class="button alt" type="submit"></li>
-						</ul>
-					</form>
-
-					<div class="copyright">
-						&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
-					</div>
-
-				</div>
-			</footer>
-
-		<Scripts 
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
--->
-	</body>
 </html>

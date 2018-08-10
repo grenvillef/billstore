@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<!--
+	Projection by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		     <title>Welcome to BillStore</title>
+               		 <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href="/css/main.css" />
+
+		<!--% include ./partials/header %-->
+	</head>
+	<body>
+
+		<!--% include ./partials/mainBanner %-->
+
+
+          <header id="header">
+                                <div class="inner">
+                                        <a href="/invoiceOverview" class="logo"><strong>BillStore</strong></a>
+                                        <nav id="nav">
+                                                Welcome,<%= locvarCustFirstName %>
+                                                <a href="/invoiceOverview">Home</a>
+                                                <a href="/about">About</a>
+                                                <a href="/logout">Logout</a>
+                                        </nav>
+                                        <a href="navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+                                </div>
+                        </header>
+
+                <!-- Banner -->
+                        <section id="banner">
+                                <div class="inner">
+                                        <header>
+                                                <h1>Welcome,<%= locvarCustFirstName %> </h1>
+                                        </header>
+
+                                        <div class="flex ">
+
+                                                <div>
+                                                        <span class="icon fa-file-text-o"></span>
+                                                        <h3><a href="/invoiceOverview">View your invoices</a></h3>
+                                                        <p>Click here to see a complete list of your invoices</p>
+                                                </div>
+
+
+                                                <div>
+                                                        <span class="icon fa-upload"></span>
+                                                        <h3><a href="/uploadInvoice">Upload a new invoice</a></h3>
+                                                </div>
+
+                                        </div>
+
+                                </div>
+                        </section>
+
+
+
+	         <section id="invoices" class="wrapper align-center">
+                                <div class="inner">
+                                       <div class="flex flex-2">
+
+			                <h3> Here is a list of your Invoices </h3>
+
+                                        <table class="table table-inverse">
+                                                      <thead>
+                        	                             <tr>
+                                                                 <th>Invoice Number</th>
+                                                                  <th>Transaction Date</th>
+                                                                  <th>Currency</th>
+                                                                  <th>Amount</th>
+                                                                  <th>Invoice Scan</th>
+
+                                                            </tr>
+                                                      </thead>
+                                               <tbody>
+                                                <% for(var i=0; i < invoices.length; i++) { %>
+                                               	<tr>
+						         <td><a href = '/invoiceDetails/<%= invoices[i].InvoiceId %>'><%= invoices[i].InvoiceNumber %> </td>
+				        		 <td><%= invoices[i].InvoiceDate.toDateString() %></td>
+				         		<td><%= invoices[i].CurrencyCode %></td>
+				       			  <td><%= invoices[i].TotalAmount %></td>
+							  <td> <span class="icon fa-file-text-o" onclick="openNav()"></span> </td>
+
+                                              	 </tr>
+                                                <% } %>
+	                                       </tbody>
+
+                                </div>
+                                </div>
+                        </section>
+
+			<div id="myNav" class="overlay">
+
+				<a href="javascript:void(0)" class="btnclose" onclick="closeNav()">[ X ] Close</a>
+
+			<!-- Button to close the overlay navigation -->
+
+				<div class="overlay-content">
+	
+					<img src="/images/invoiceScan_1_7.jpg">
+				</div>
+
+			</div>
+
+<!-- Use any element to open/show the overlay navigation menu -->
+
+
+<script>
+function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+}
+
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}
+</script>
+
+		<!-- Footer >
+		<% include ./partials/footer %-->
+
+	</body>
+</html>

@@ -16,6 +16,8 @@ var signer = crypto.createSign('sha256')
 
 var signature = signer.sign(privateKey, 'base64');  
 
+console.log(signature);
+
 var accessToken;
 /*
 
@@ -86,6 +88,8 @@ signingString="(request-target): get /grants/preflight-auth-url\ndate: "+reqDate
 var signer = crypto.createSign('sha256')
    .update(signingString);
 signature = signer.sign(privateKey, 'base64');  
+
+console.log(signature);
 
 //console.log(dateformat(now, "ddd, dd mmm yyyy HH:MM:SS GMT"));
 var options = {

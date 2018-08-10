@@ -29,6 +29,7 @@ var signupRouter = require('./routes/signup');
 var invoiceOverviewRouter = require('./routes/invoiceOverview');
 var invoiceDetailsRouter = require('./routes/invoiceDetails');
 var uploadInvoiceRouter = require('./routes/uploadInvoice');
+var bankTransactionsRouter = require('./routes/bankTransactions');
 
 
 var app = express();
@@ -73,6 +74,7 @@ require('./routes/invoiceOverview.js')(app, passport);
 require('./routes/invoiceDetails.js')(app, passport);
 require('./routes/about.js')(app, passport);
 require('./routes/uploadInvoice.js')(app, passport);
+require('./routes/bankTransactions.js')(app, passport);
 
 
 
